@@ -6,6 +6,7 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/../../Day3-Spring/spring-web-start/pom.xml" />
       </list>
     </option>
   </component>
