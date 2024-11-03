@@ -1,6 +1,6 @@
-package testing;
+package schedule.testing;
 
-import schedule.SysUser;
+import schedule.pojo.SysUser;
 
 public class Testlombok {
 

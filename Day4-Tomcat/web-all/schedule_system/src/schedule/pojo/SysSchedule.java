@@ -1,4 +1,4 @@
-package schedule;
+package schedule.pojo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

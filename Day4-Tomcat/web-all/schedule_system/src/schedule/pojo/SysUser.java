@@ -1,10 +1,9 @@
-package schedule;
+package schedule.pojo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Objects;
 /*
 使用lombok也可以
 lombok jar包
@@ -15,5 +14,5 @@ lombok jar包
 public class SysUser {
     private Integer uid;
     private String username;
-    private String userPed;
+    private String userpwd;
 }
