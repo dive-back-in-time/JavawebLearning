@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.lang.reflect.Method;
 
 /**
  * 增加请求 /schedule/add
@@ -16,27 +17,7 @@ import java.io.IOException;
  */
 
 @WebServlet("/schedule/*")
-public class SysScheduleController extends HttpServlet {
-
-    @Override
-    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String requestURI = req.getRequestURI();
-        String[] split = requestURI.split("/");
-        String name = split[split.length - 1];
-        if (name.equals("add")) {
-            //增加处理
-            add(req,resp);
-        } else if (name.equals("find")) {
-            //查询处理
-            find(req, resp);
-        } else if (name.equals("update")) {
-            //修改处理
-            update(req, resp);
-        } else if (name.equals("remove")) {
-            //删除处理
-            delete(req, resp);
-        }
-    }
+public class SysScheduleController extends BaseController {
 
     protected void add(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("add");;
