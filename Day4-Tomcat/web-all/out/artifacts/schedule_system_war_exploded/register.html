@@ -52,9 +52,29 @@
             if(!usernameReg.test(username)){
                 usernameMsg.innerText="格式有误"
                 return false
-            } 
-            usernameMsg.innerText="OK"
-            return true 
+            }
+
+            //格式通过之后继续校验用户名占用问题
+            var request = new XMLHttpRequest()
+            //设置回调函数
+            request.onreadystatechange = function() {
+                if (request.readyState == 4 && request.status == 200) {
+                    var result = JSON.parse(request.responseText)
+                    if (result.code==200) {
+                        usernameMsg.innerText = "可用"
+                    } else  {
+                        usernameMsg.innerText = "不可用"
+
+                    }
+                }
+            }
+            //设置请求方式与资源路径
+            request.open("get","/user/checkUsernameUsed?username=" + username)
+
+            //发送请求
+            request.send()
+            // usernameMsg.innerText="OK"
+            // return true
         }
 
 
@@ -81,11 +101,14 @@
             if(!userPwdReg.test(reUserPwd)){
                 reUserPwdMsg.innerText="格式有误"
                 return false
-            } 
+            }
+
+
+
             // 获得上次密码,对比两次密码是否一致
             var userPwdInput = document.getElementById("userPwdInput")  
             var userPwd = userPwdInput.value  
-            if(reUserPwd != userPwd){
+            if (reUserPwd != userPwd){
                 reUserPwdMsg.innerText="两次密码不一致"
                 return false
             } 

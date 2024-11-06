@@ -1,15 +1,19 @@
 package schedule.control;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import schedule.common.Result;
+import schedule.common.ResultCodeEnum;
 import schedule.pojo.SysUser;
 import schedule.service.SysUserService;
 import schedule.service.impl.SysUserServiceImpl;
 import schedule.util.MD5Util;
+import schedule.util.WebUtil;
 
 import java.io.IOException;
 
@@ -72,13 +76,45 @@ public class SysUserController extends BaseController {
 
     }
 
+    /**
+     * 注册时接收要注册的用户名，校验用户名是否被占用
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
+    protected void checkUsernameUsed(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //接受用户名
+        String username = req.getParameter("username");
+
+        //调用服务层处理方法查询是否有对应用户
+        SysUser user = userService.findbyUser(username);
+
+        /*
+            解决响应格式问题
+            要响应一个JSON字符串
+         */
+        Result result = Result.ok(null);
+
+        //有则响应已占用，没有回复未占用，ok
+        if (user == null) {
+
+        } else {
+            result = Result.build(null, ResultCodeEnum.USERNAME_USED);
+        }
+
+        //转换成json
+        WebUtil.writeJson(resp,result);
+    }
+
     protected void update(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("update");;
+        System.out.println("update");
 
     }
 
     protected void delete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("delete");;
+        System.out.println("delete");
 
     }
 }
+
